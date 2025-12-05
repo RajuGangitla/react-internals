@@ -86,6 +86,8 @@ const ChapterOne = () => {
     setIsOpen(false);
   };
 
+  const el = <VerySlowComponent />;
+  console.log(el, "elk");
   return (
     <div className="layout mx-auto max-w-2xl p-8">
       <div className="mb-8">
