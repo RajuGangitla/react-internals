@@ -6,6 +6,8 @@ import ChapterOne from "@/components/chapter-1";
 import ChapterOneOptimised from "@/components/chapter-1/optimised";
 import ChapterTwo from "@/components/chapter-2";
 import ChapterTwoOptimised from "@/components/chapter-2/optimised";
+import ChapterThree from "@/components/chapter-3";
+import ChapterThreeOptimised from "@/components/chapter-3/optimised";
 
 type ChapterItem = {
   id: string;
@@ -29,6 +31,13 @@ const chapters: ChapterItem[] = [
     description: "Elements, Children as Props",
     nonOptimised: <ChapterTwo />,
     optimised: <ChapterTwoOptimised />,
+  },
+  {
+    id: "chapter-3",
+    title: "Chapter 3",
+    description: "Configuration & Elements as Props",
+    nonOptimised: <ChapterThree />,
+    optimised: <ChapterThreeOptimised />,
   },
 ];
 
