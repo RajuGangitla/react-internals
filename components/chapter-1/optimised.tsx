@@ -1,16 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import ButtonWithDialog from "./button-with-dialog";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // VerySlowComponent - simulates a slow rendering component
 // This demonstrates how state changes in parent affect child re-renders
@@ -47,6 +39,25 @@ const ChapterOneOptimised = () => {
           This example demonstrates how state changes trigger re-renders in
           React.
         </p>
+        <div className="mt-6">
+            <CodeBlock 
+                fileName="components/chapter-1/optimised.tsx"
+                code={`
+const ChapterOneOptimised = () => {
+  // ✅ State is moved down into this component
+  // so ChapterOneOptimised doesn't re-render
+  return (
+    <div>
+      <ButtonWithDialog />
+      
+      {/* This component stays mounted and doesn't re-render! */}
+      <VerySlowComponent />
+    </div>
+  );
+};
+                `}
+            />
+        </div>
       </div>
       <ButtonWithDialog />
       <VerySlowComponent />
@@ -55,4 +66,3 @@ const ChapterOneOptimised = () => {
 };
 
 export default ChapterOneOptimised;
-

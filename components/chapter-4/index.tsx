@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, cloneElement, isValidElement, ReactElement } from "react";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // Icon components
 type IconProps = {
@@ -105,8 +106,6 @@ const ButtonWithClone = ({
 
 // Component showing the problem with sharing state via cloneElement
 const ChapterFour = () => {
-  const [hoverCount, setHoverCount] = useState(0);
-
   return (
     <div className="layout mx-auto max-w-2xl p-8">
       <div className="mb-8">
@@ -125,12 +124,14 @@ const ChapterFour = () => {
       </div>
 
       {/* Code Example - The Problem */}
-      <div className="mb-8 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="mb-8">
         <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-3">
           🔴 The Problem with cloneElement:
         </h3>
-        <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`const Button = ({ icon }) => {
+        <CodeBlock 
+            fileName="components/chapter-4/index.tsx"
+            code={`
+const Button = ({ icon }) => {
   const [isHovered, setIsHovered] = useState(false);
   
   // ❌ How do we share isHovered with the icon?
@@ -145,8 +146,9 @@ const ChapterFour = () => {
   });
   
   return <button>{clonedIcon}</button>;
-};`}
-        </pre>
+};
+            `}
+        />
       </div>
 
       <div className="space-y-6">
@@ -193,9 +195,9 @@ const ChapterFour = () => {
         <section className="rounded-lg border border-zinc-200 p-6 dark:border-zinc-800">
           <h3 className="text-sm font-semibold mb-4">Another Problem - Props Mismatch:</h3>
           
-          <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900">
-            <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`// Our Button expects icons with size and color props
+          <CodeBlock 
+            code={`
+// Our Button expects icons with size and color props
 const defaultProps = {
   size: 'large',
   color: 'white',
@@ -206,9 +208,9 @@ const defaultProps = {
 <Button icon={<LibraryIcon fontSize="lg" fill="white" />} />
 
 // The Button will try to pass size/color,
-// but LibraryIcon doesn't use those props!`}
-            </pre>
-          </div>
+// but LibraryIcon doesn't use those props!
+            `}
+          />
 
           <div className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3">
             <p className="text-xs text-red-600 dark:text-red-400">
@@ -264,9 +266,9 @@ const defaultProps = {
               width and shares that state with its children?
             </p>
 
-            <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900">
-              <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`// The ResizeDetector tracks window width
+            <CodeBlock 
+                code={`
+// The ResizeDetector tracks window width
 const ResizeDetector = ({ onWidthChange }) => {
   const [width, setWidth] = useState();
   
@@ -289,9 +291,9 @@ const Layout = () => {
       {windowWidth > 600 ? <WideLayout /> : <NarrowLayout />}
     </>
   );
-};`}
-              </pre>
-            </div>
+};
+                `}
+            />
 
             <div className="mt-2 rounded-lg border border-red-500/30 bg-red-500/10 p-3">
               <p className="text-xs text-red-600 dark:text-red-400">
@@ -308,7 +310,7 @@ const Layout = () => {
             💡 The Solution: Render Props
           </h3>
           <p className="text-sm text-emerald-600 dark:text-emerald-400">
-            Instead of passing an element, pass a <strong>function that returns an element</strong>.
+            Instead of passings an element, pass a <strong>function that returns an element</strong>.
             The Button can call this function and pass any props or state it wants!
             Check the optimised version to see how →
           </p>
@@ -319,4 +321,3 @@ const Layout = () => {
 };
 
 export default ChapterFour;
-

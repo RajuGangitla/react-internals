@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CodeBlock } from "@/components/ui/code-block";
 import { LoadingIcon, ErrorIcon, WarningIcon, CheckIcon } from "./icons";
 
 // ❌ THE PROBLEM: Button with too many configuration props
@@ -116,20 +117,25 @@ const ChapterThree = () => {
       </div>
 
       {/* Code Example - The Problematic Props */}
-      <div className="mb-8 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="mb-8">
         <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-3">
           🔴 The Problematic Button API:
         </h3>
-        <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`const Button = ({
+        <CodeBlock 
+            fileName="components/chapter-3/index.tsx"
+            code={`
+const Button = ({
   isLoading,
   iconName,      // "loading" | "error" | "warning" | ...
   iconColor,     // "white" | "black" | "red" | ...
   iconSize,      // "small" | "medium" | "large"
   iconPosition,  // "left" | "right"
   // ... and it keeps growing!
-}) => { ... }`}
-        </pre>
+}) => { 
+  // Complex logic to figure out which icon to render...
+}
+            `}
+        />
       </div>
 
       {/* Examples */}
@@ -243,4 +249,3 @@ const ChapterThree = () => {
 };
 
 export default ChapterThree;
-

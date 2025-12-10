@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // VerySlowComponent - simulates a slow rendering component
 const VerySlowComponent = () => {
@@ -84,6 +85,27 @@ const ChapterTwo = () => {
           This example demonstrates how placing components inside a stateful
           component causes unnecessary re-renders.
         </p>
+        <div className="mt-6">
+            <CodeBlock 
+                fileName="components/chapter-2/index.tsx"
+                code={`
+const MovingBlock = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  return (
+    <div onMouseMove={handleMouseMove}>
+      {/* 
+         This component is rendered INSIDE MovingBlock.
+         When 'position' state updates, MovingBlock re-renders.
+         Therefore, VerySlowComponent also re-renders!
+      */}
+      <VerySlowComponent />
+    </div>
+  );
+};
+                `}
+            />
+        </div>
         <div className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 p-4">
           <p className="text-sm text-red-600 dark:text-red-400">
             <strong>❌ Problem:</strong> The VerySlowComponent is defined INSIDE
@@ -98,4 +120,3 @@ const ChapterTwo = () => {
 };
 
 export default ChapterTwo;
-

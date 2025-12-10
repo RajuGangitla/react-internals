@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, ReactNode } from "react";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // Icon components
 type IconProps = {
@@ -227,12 +228,14 @@ const ChapterFourOptimised = () => {
       </div>
 
       {/* Code Example - Render Props */}
-      <div className="mb-8 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="mb-8">
         <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-3">
           🟢 The Render Props Pattern:
         </h3>
-        <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`// Button passes props AND state to the render function
+        <CodeBlock 
+            fileName="components/chapter-4/optimised.tsx"
+            code={`
+// Button passes props AND state to the render function
 const Button = ({ renderIcon }) => {
   const [isHovered, setIsHovered] = useState(false);
   const iconProps = { size: 'medium', color: 'white' };
@@ -249,8 +252,9 @@ const Button = ({ renderIcon }) => {
   state.isHovered 
     ? <HoveredIcon {...props} /> 
     : <NormalIcon {...props} />
-)} />`}
-        </pre>
+)} />
+            `}
+        />
       </div>
 
       <div className="space-y-8">
@@ -357,15 +361,16 @@ const Button = ({ renderIcon }) => {
         <section className="rounded-lg border border-zinc-200 p-6 dark:border-zinc-800">
           <h3 className="text-sm font-semibold mb-4">2. Children as Render Props - ResizeDetector:</h3>
           
-          <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900 mb-4">
-            <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`<ResizeDetector>
+          <CodeBlock 
+            code={`
+<ResizeDetector>
   {(windowWidth) => (
     windowWidth > 500 ? <WideLayout /> : <NarrowLayout />
   )}
-</ResizeDetector>`}
-            </pre>
-          </div>
+</ResizeDetector>
+            `}
+            className="mb-4"
+          />
 
           <ResizeDetector>
             {(windowWidth) => (
@@ -390,9 +395,9 @@ const Button = ({ renderIcon }) => {
         <section className="rounded-lg border border-zinc-200 p-6 dark:border-zinc-800">
           <h3 className="text-sm font-semibold mb-4">3. Hooks Replaced This Pattern (99% of cases):</h3>
           
-          <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900 mb-4">
-            <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`// Hook version - cleaner and simpler!
+          <CodeBlock 
+            code={`
+// Hook version - cleaner and simpler!
 const useResizeDetector = () => {
   const [width, setWidth] = useState(window.innerWidth);
   
@@ -409,9 +414,10 @@ const useResizeDetector = () => {
 const Layout = () => {
   const windowWidth = useResizeDetector();
   return windowWidth > 500 ? <WideLayout /> : <NarrowLayout />;
-};`}
-            </pre>
-          </div>
+};
+            `}
+            className="mb-4"
+          />
 
           <div className="rounded-lg border border-zinc-300 p-4 dark:border-zinc-700">
             <p className="text-xs text-muted-foreground mb-2">Same result with hook:</p>
@@ -435,9 +441,9 @@ const Layout = () => {
             in a specific container), render props can be cleaner than hooks + refs.
           </p>
 
-          <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900 mb-4">
-            <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`const ScrollDetector = ({ children }) => {
+          <CodeBlock 
+            code={`
+const ScrollDetector = ({ children }) => {
   const [scroll, setScroll] = useState(0);
   
   return (
@@ -445,9 +451,10 @@ const Layout = () => {
       {children(scroll)}
     </div>
   );
-};`}
-            </pre>
-          </div>
+};
+            `}
+            className="mb-4"
+          />
 
           <ScrollDetector>
             {(scroll) => (
@@ -526,4 +533,3 @@ const Layout = () => {
 };
 
 export default ChapterFourOptimised;
-

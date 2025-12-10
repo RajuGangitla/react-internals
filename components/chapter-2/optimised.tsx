@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, ReactNode } from "react";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // VerySlowComponent - simulates a slow rendering component
 const VerySlowComponent = () => {
@@ -88,6 +89,36 @@ const ChapterTwoOptimised = () => {
           This example demonstrates how passing components as children prevents
           unnecessary re-renders.
         </p>
+        <div className="mt-6">
+            <CodeBlock 
+                fileName="components/chapter-2/optimised.tsx"
+                code={`
+const MovingBlock = ({ children }) => {
+  // State changes here...
+  return (
+    <div onMouseMove={handleMouseMove}>
+      {/* 
+         'children' is passed as a prop. 
+         React knows that the 'children' prop hasn't changed 
+         (it's the same object reference from the parent), 
+         so it doesn't need to re-render the children!
+      */}
+      {children}
+    </div>
+  );
+};
+
+const ChapterTwoOptimised = () => {
+  return (
+    // VerySlowComponent is created HERE, where state doesn't change
+    <MovingBlock>
+      <VerySlowComponent />
+    </MovingBlock>
+  );
+};
+                `}
+            />
+        </div>
         <div className="mt-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4">
           <p className="text-sm text-emerald-600 dark:text-emerald-400">
             <strong>✅ Solution:</strong> The VerySlowComponent is passed as{" "}
@@ -107,4 +138,3 @@ const ChapterTwoOptimised = () => {
 };
 
 export default ChapterTwoOptimised;
-

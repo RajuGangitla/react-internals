@@ -12,6 +12,8 @@ import ChapterFour from "@/components/chapter-4";
 import ChapterFourOptimised from "@/components/chapter-4/optimised";
 import ChapterFive from "@/components/chapter-5";
 import ChapterFiveOptimised from "@/components/chapter-5/optimised";
+import ChapterSix from "@/components/chapter-6";
+import ChapterSixOptimised from "@/components/chapter-6/optimised";
 
 type ChapterItem = {
   id: string;
@@ -56,6 +58,13 @@ const chapters: ChapterItem[] = [
     description: "Memoization (useMemo, useCallback)",
     nonOptimised: <ChapterFive />,
     optimised: <ChapterFiveOptimised />,
+  },
+  {
+    id: "chapter-6",
+    title: "Chapter 6",
+    description: "Diffing & Reconciliation",
+    nonOptimised: <ChapterSix />,
+    optimised: <ChapterSixOptimised />,
   },
 ];
 

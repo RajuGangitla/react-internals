@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // VerySlowComponent - simulates a slow rendering component
 // We wrap it in React.memo, hoping it won't re-render
@@ -74,6 +75,27 @@ const ChapterFive = () => {
         <p className="mt-2 text-muted-foreground">
           This example demonstrates how broken memoization causes unnecessary re-renders despite using <code>React.memo</code>.
         </p>
+        <div className="mt-6">
+            <CodeBlock 
+                fileName="components/chapter-5/index.tsx"
+                code={`
+// ❌ Inline objects and functions create NEW references on every render
+<VerySlowComponent 
+    // New object reference every render: { value: 1 } !== { value: 1 }
+    data={{ value: 1 }} 
+    
+    // New function reference every render: () => ... !== () => ...
+    onChange={() => console.log("Clicked")} 
+/>
+
+// ❌ JSX Children are also objects!
+<SlowComponentWithChildren>
+   {/* This JSX creates a NEW object every render! */}
+   <div>I am passed as children!</div>
+</SlowComponentWithChildren>
+                `}
+            />
+        </div>
         <div className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 p-4">
           <p className="text-sm text-red-600 dark:text-red-400">
             <strong>❌ Problem:</strong> The components are wrapped in <code>React.memo</code>, but we pass <strong>inline props/children</strong>. These create new references on every render, causing the comparison to fail.

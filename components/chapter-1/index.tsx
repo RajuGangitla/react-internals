@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // VerySlowComponent - simulates a slow rendering component
 // This demonstrates how state changes in parent affect child re-renders
@@ -95,6 +96,27 @@ const ChapterOne = () => {
           This example demonstrates how state changes trigger re-renders in
           React.
         </p>
+        <div className="mt-6">
+            <CodeBlock 
+                fileName="components/chapter-1/index.tsx"
+                code={`
+const ChapterOne = () => {
+  // ❌ State is declared at the top level
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      {isOpen ? <ModalDialog /> : null}
+      
+      {/* This re-renders when isOpen changes! */}
+      <VerySlowComponent /> 
+    </div>
+  );
+};
+                `}
+            />
+        </div>
       </div>
 
       {/* Add the button */}
@@ -115,4 +137,3 @@ const ChapterOne = () => {
 };
 
 export default ChapterOne;
-

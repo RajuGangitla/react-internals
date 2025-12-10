@@ -2,6 +2,7 @@
 
 import { useState, ReactNode, cloneElement, isValidElement, ReactElement } from "react";
 import { LoadingIcon, ErrorIcon, WarningIcon, CheckIcon, AvatarIcon } from "./icons";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // ✅ THE SOLUTION: Button that accepts an element as a prop
 // The consumer has full control over the icon configuration
@@ -209,20 +210,23 @@ const ChapterThreeOptimised = () => {
       </div>
 
       {/* Code Example - The Clean API */}
-      <div className="mb-8 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="mb-8">
         <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-3">
           🟢 The Clean Button API:
         </h3>
-        <pre className="text-xs overflow-x-auto text-zinc-700 dark:text-zinc-300">
-{`const Button = ({ icon, children }) => {
+        <CodeBlock
+            fileName="components/chapter-3/optimised.tsx"
+            code={`
+const Button = ({ icon, children }) => {
   return <button>{children} {icon}</button>;
 };
 
 // Consumer has full control!
 <Button icon={<LoadingIcon color="white" />} />
 <Button icon={<ErrorIcon color="red" size="large" />} />
-<Button icon={<AvatarIcon />} />`}
-        </pre>
+<Button icon={<AvatarIcon />} />
+            `}
+        />
       </div>
 
       <div className="space-y-8">
@@ -368,13 +372,15 @@ const ChapterThreeOptimised = () => {
             }
           />
 
-          <pre className="mt-4 text-xs overflow-x-auto rounded-lg bg-zinc-100 p-3 text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
-{`<ThreeColumnsLayout
+          <div className="mt-4">
+            <CodeBlock 
+                code={`<ThreeColumnsLayout
   leftColumn={<Sidebar />}
   middleColumn={<MainContent />}
   rightColumn={<Widgets />}
 />`}
-          </pre>
+            />
+          </div>
         </section>
 
         {/* Section 4: CloneElement for Default Props */}
@@ -433,4 +439,3 @@ const ChapterThreeOptimised = () => {
 };
 
 export default ChapterThreeOptimised;
-

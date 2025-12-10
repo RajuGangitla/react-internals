@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useCallback } from "react";
+import { CodeBlock } from "@/components/ui/code-block";
 
 // VerySlowComponent - same as before
 const VerySlowComponent = React.memo(({ data, onChange }: { data: { value: number }; onChange: () => void }) => {
@@ -86,6 +87,34 @@ const ChapterFiveOptimised = () => {
         <p className="mt-2 text-muted-foreground">
           This example shows how to correctly use <code>useMemo</code> and <code>useCallback</code> to make <code>React.memo</code> work.
         </p>
+        <div className="mt-6">
+            <CodeBlock 
+                fileName="components/chapter-5/optimised.tsx"
+                code={`
+const ChapterFiveOptimised = () => {
+  // ✅ Cache the object reference
+  const data = useMemo(() => ({ value: 1 }), []);
+
+  // ✅ Cache the function reference
+  const handleChange = useCallback(() => {
+    console.log("Clicked");
+  }, []);
+
+  // ✅ Cache the children JSX reference
+  const childContent = useMemo(() => (
+    <div>I am passed as memoized children!</div>
+  ), []);
+
+  return (
+    <>
+      <VerySlowComponent data={data} onChange={handleChange} />
+      <SlowComponentWithChildren>{childContent}</SlowComponentWithChildren>
+    </>
+  );
+};
+                `}
+            />
+        </div>
         <div className="mt-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4">
           <p className="text-sm text-emerald-600 dark:text-emerald-400">
             <strong>✅ Solution:</strong> We use <code>useMemo</code> for objects/children and <code>useCallback</code> for functions. Now the references are stable across re-renders.
