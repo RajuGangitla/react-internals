@@ -14,6 +14,8 @@ import ChapterFive from "@/components/chapter-5";
 import ChapterFiveOptimised from "@/components/chapter-5/optimised";
 import ChapterSix from "@/components/chapter-6";
 import ChapterSixOptimised from "@/components/chapter-6/optimised";
+import ChapterSeven from "@/components/chapter-7";
+import ChapterSevenOptimised from "@/components/chapter-7/optimised";
 
 type ChapterItem = {
   id: string;
@@ -65,6 +67,13 @@ const chapters: ChapterItem[] = [
     description: "Diffing & Reconciliation",
     nonOptimised: <ChapterSix />,
     optimised: <ChapterSixOptimised />,
+  },
+  {
+    id: "chapter-7",
+    title: "Chapter 7",
+    description: "Higher-Order Components",
+    nonOptimised: <ChapterSeven />,
+    optimised: <ChapterSevenOptimised />,
   },
 ];
 
