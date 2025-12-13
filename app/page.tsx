@@ -30,6 +30,8 @@ import ChapterThirteen from "@/components/chapter-13";
 import ChapterThirteenOptimised from "@/components/chapter-13/optimised";
 import ChapterFourteen from "@/components/chapter-14";
 import ChapterFourteenOptimised from "@/components/chapter-14/optimised";
+import ChapterFifteen from "@/components/chapter-15";
+import ChapterFifteenOptimised from "@/components/chapter-15/optimised";
 
 type ChapterItem = {
   id: string;
@@ -137,6 +139,13 @@ const chapters: ChapterItem[] = [
     description: "Race Conditions",
     nonOptimised: <ChapterFourteen />,
     optimised: <ChapterFourteenOptimised />,
+  },
+  {
+    id: "chapter-15",
+    title: "Chapter 15",
+    description: "Error Handling",
+    nonOptimised: <ChapterFifteen />,
+    optimised: <ChapterFifteenOptimised />,
   },
 ];
 
