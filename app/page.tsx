@@ -20,6 +20,12 @@ import ChapterEight from "@/components/chapter-8";
 import ChapterEightOptimised from "@/components/chapter-8/optimised";
 import ChapterNine from "@/components/chapter-9";
 import ChapterNineOptimised from "@/components/chapter-9/optimised";
+import ChapterTen from "@/components/chapter-10";
+import ChapterTenOptimised from "@/components/chapter-10/optimised";
+import ChapterEleven from "@/components/chapter-11";
+import ChapterElevenOptimised from "@/components/chapter-11/optimised";
+import ChapterTwelve from "@/components/chapter-12";
+import ChapterTwelveOptimised from "@/components/chapter-12/optimised";
 
 type ChapterItem = {
   id: string;
@@ -92,6 +98,27 @@ const chapters: ChapterItem[] = [
     description: "Refs & Imperative API",
     nonOptimised: <ChapterNine />,
     optimised: <ChapterNineOptimised />,
+  },
+  {
+    id: "chapter-10",
+    title: "Chapter 10",
+    description: "Closures in React",
+    nonOptimised: <ChapterTen />,
+    optimised: <ChapterTenOptimised />,
+  },
+  {
+    id: "chapter-11",
+    title: "Chapter 11",
+    description: "Debouncing & Throttling",
+    nonOptimised: <ChapterEleven />,
+    optimised: <ChapterElevenOptimised />,
+  },
+  {
+    id: "chapter-12",
+    title: "Chapter 12",
+    description: "useLayoutEffect & Flickering",
+    nonOptimised: <ChapterTwelve />,
+    optimised: <ChapterTwelveOptimised />,
   },
 ];
 
