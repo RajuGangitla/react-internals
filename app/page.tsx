@@ -26,6 +26,10 @@ import ChapterEleven from "@/components/chapter-11";
 import ChapterElevenOptimised from "@/components/chapter-11/optimised";
 import ChapterTwelve from "@/components/chapter-12";
 import ChapterTwelveOptimised from "@/components/chapter-12/optimised";
+import ChapterThirteen from "@/components/chapter-13";
+import ChapterThirteenOptimised from "@/components/chapter-13/optimised";
+import ChapterFourteen from "@/components/chapter-14";
+import ChapterFourteenOptimised from "@/components/chapter-14/optimised";
 
 type ChapterItem = {
   id: string;
@@ -119,6 +123,20 @@ const chapters: ChapterItem[] = [
     description: "useLayoutEffect & Flickering",
     nonOptimised: <ChapterTwelve />,
     optimised: <ChapterTwelveOptimised />,
+  },
+  {
+    id: "chapter-13",
+    title: "Chapter 13",
+    description: "Data Fetching & Performance",
+    nonOptimised: <ChapterThirteen />,
+    optimised: <ChapterThirteenOptimised />,
+  },
+  {
+    id: "chapter-14",
+    title: "Chapter 14",
+    description: "Race Conditions",
+    nonOptimised: <ChapterFourteen />,
+    optimised: <ChapterFourteenOptimised />,
   },
 ];
 
